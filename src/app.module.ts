@@ -7,6 +7,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { CarsModule } from './cars/cars.module';
 import { join } from 'path';
 import { DriversModule } from './drivers/drivers.module';
+import { Driver } from './entities/driver.entity';
+import { Car } from './entities/car.entity';
 
 @Module({
   imports: [
@@ -17,7 +19,7 @@ import { DriversModule } from './drivers/drivers.module';
       username: 'root',
       password: 'root',
       database: 'mysql',
-      entities: [],
+      entities: [Car, Driver],
       synchronize: true,
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({

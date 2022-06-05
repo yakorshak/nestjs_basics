@@ -1,0 +1,38 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Car {
+  id: Int!
+  brand: String!
+  drivers: [Driver!]
+}
+
+type Driver {
+  id: Int!
+  name: String!
+  carId: Int!
+  car: Car!
+}
+
+type Query {
+  getAllCars: [Car!]!
+  getCar(id: Int!): Car!
+  driver(id: Int!): Driver!
+  test(carId: Int!): [Driver!]!
+}
+
+type Mutation {
+  createCar(createCarInput: CreateCarInput!): Car!
+  createDriver(createDriverInput: CreateDriverInput!): Driver!
+}
+
+input CreateCarInput {
+  brand: String!
+  driver: String
+}
+
+input CreateDriverInput {
+  name: String!
+  carId: Int!
+}
