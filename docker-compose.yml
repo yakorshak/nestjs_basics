@@ -1,16 +1,22 @@
 version: "3.1"
-
 services:
   db:
     image: mysql:5.7
     restart: always
     ports: 
-      - 3306:3306
+     - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
+  node-app:
+      build: .
+      depends_on: 
+        - db
+      command: npm run start
+      ports: 
+        - 3000:3000
+      environment:
+        - DB_SERVER=db
+    
 
-  # server:
-  # // cвой имедж
-  #   image:
-  #   restart: always
-  #   port: 8080:80
+  
+

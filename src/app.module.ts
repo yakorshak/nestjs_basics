@@ -10,11 +10,23 @@ import { DriversModule } from './drivers/drivers.module';
 import { Driver } from './entities/driver.entity';
 import { Car } from './entities/car.entity';
 
+console.log({
+  type: 'mysql',
+  host: process.env.DB_SERVER || '127.0.0.1',
+  port: 3306,
+  username: 'root',
+  password: 'root',
+  database: 'mysql',
+  entities: [Car, Driver],
+  synchronize: false,
+});
+
+console.log(process.env);
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: process.env.DB_SERVER || '127.0.0.1',
       port: 3306,
       username: 'root',
       password: 'root',
