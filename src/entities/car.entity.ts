@@ -13,6 +13,10 @@ export class Car {
   @Field()
   brand: string;
 
+  @Column()
+  @Field()
+  color: string;
+
   @OneToMany(() => Driver, (drivers) => drivers.car)
   @Field((type) => [Driver], { nullable: true })
   drivers?: Driver[];

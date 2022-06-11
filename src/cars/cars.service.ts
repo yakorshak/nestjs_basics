@@ -6,6 +6,7 @@ import { Car } from 'src/entities/car.entity';
 import { Driver } from 'src/entities/driver.entity';
 import { Repository } from 'typeorm';
 import { CreateCarInput } from './dto/create-car.input';
+import { updateCarInput } from './dto/update-car.input';
 
 @Injectable()
 export class CarsService {
@@ -36,7 +37,18 @@ export class CarsService {
     return this.driversService.findDrivers(carId);
   }
 
-  // can add update
+  async updateCar(id: number, updateCarInput: updateCarInput): Promise<Car> {
+    const updatedCar = await this.carsRepository.findOneOrFail({
+      where: { id },
+    });
+    Object.assign(updatedCar, updateCarInput);
+    return await this.carsRepository.save(updatedCar);
+  }
 
-  // can add remove
+  async deleteCar(id: number): Promise<Car> {
+    const carToDelete = await this.carsRepository.findOneOrFail({
+      where: { id },
+    });
+    return await this.carsRepository.remove(carToDelete);
+  }
 }

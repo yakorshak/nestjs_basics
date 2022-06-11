@@ -12,6 +12,7 @@ import { Car } from 'src/entities/car.entity';
 import { Driver } from 'src/entities/driver.entity';
 import { CarsService } from './cars.service';
 import { CreateCarInput } from './dto/create-car.input';
+import { updateCarInput } from './dto/update-car.input';
 
 @Resolver((of) => Car)
 export class CarsResolver {
@@ -22,9 +23,19 @@ export class CarsResolver {
     return this.carsService.findAll();
   }
 
+  // type ?
   @Query((returns) => Car)
   getCar(@Args('id', { type: () => Int }) id: number): Promise<Car> {
     return this.carsService.getCar(id);
+  }
+
+  // type ?
+  @Mutation((returns) => Car)
+  updateCar(
+    @Args('id', { type: () => Int }) id: number,
+    @Args('data') data: updateCarInput,
+  ): Promise<Car> {
+    return this.carsService.updateCar(id, data);
   }
 
   @Mutation((returns) => Car)
@@ -32,6 +43,12 @@ export class CarsResolver {
     @Args('createCarInput') createCarInput: CreateCarInput,
   ): Promise<Car> {
     return this.carsService.createCar(createCarInput);
+  }
+
+  // type ?
+  @Mutation((returns) => Car)
+  deleteCar(@Args('id', { type: () => Int }) id: number): Promise<Car> {
+    return this.carsService.deleteCar(id);
   }
 
   @ResolveField((returns) => [Driver])
