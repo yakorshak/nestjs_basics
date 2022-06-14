@@ -25,3 +25,11 @@ export class DriversService {
     });
   }
 }
+// : Promise<any>
+//   async deleteDrivers(carId: number) {
+//     const driversToDelete = await this.driversRepository.find({
+//       where: { carId: carId },
+//     });
+//     return await this.driversRepository.remove(driversToDelete);
+//   }
+// }

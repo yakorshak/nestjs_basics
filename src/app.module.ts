@@ -18,7 +18,7 @@ console.log({
   password: 'root',
   database: 'mysql',
   entities: [Car, Driver],
-  synchronize: false,
+  synchronize: true,
 });
 
 console.log(process.env);

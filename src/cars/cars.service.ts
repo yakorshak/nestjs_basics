@@ -45,10 +45,15 @@ export class CarsService {
     return await this.carsRepository.save(updatedCar);
   }
 
-  async deleteCar(id: number): Promise<Car> {
+  // : Promise<any> ??
+  async deleteCar(id: number) {
     const carToDelete = await this.carsRepository.findOneOrFail({
       where: { id },
     });
+    // cascade?
+    // if (carToDelete.drivers) {
+    //   this.driversService.deleteDrivers(id);
+    // }
     return await this.carsRepository.remove(carToDelete);
   }
 }

@@ -5,6 +5,7 @@
 type Car {
   id: Int!
   brand: String!
+  color: String!
   drivers: [Driver!]
 }
 
@@ -12,7 +13,7 @@ type Driver {
   id: Int!
   name: String!
   carId: Int!
-  car: Car!
+  car: Car
 }
 
 type Query {
@@ -23,13 +24,20 @@ type Query {
 }
 
 type Mutation {
+  updateCar(id: Int!, data: updateCarInput!): Car!
   createCar(createCarInput: CreateCarInput!): Car!
+  deleteCar(id: Int!): Car!
   createDriver(createDriverInput: CreateDriverInput!): Driver!
+}
+
+input updateCarInput {
+  brand: String!
+  color: String!
 }
 
 input CreateCarInput {
   brand: String!
-  driver: String
+  color: String
 }
 
 input CreateDriverInput {
