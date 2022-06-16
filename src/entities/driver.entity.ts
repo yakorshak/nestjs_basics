@@ -13,12 +13,13 @@ export class Driver {
   @Field()
   name: string;
 
-  // как формируется этот параметр?
-  // @JoinColumn()? под капотом?
+  // how being created this property
+  // @JoinColumn() under hood?
   @Column()
   @Field((type) => Int)
   carId: number;
 
+  // where it is placed into our DB?
   @ManyToOne(() => Car, (car) => car.drivers, { onDelete: 'CASCADE' })
   @Field((type) => Car, { nullable: true })
   car: Car;

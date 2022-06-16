@@ -17,6 +17,7 @@ export class Car {
   @Field()
   color: string;
 
+  // where it is placed into our DB?
   @OneToMany(() => Driver, (drivers) => drivers.car)
   @Field((type) => [Driver], { nullable: true })
   drivers?: Driver[];

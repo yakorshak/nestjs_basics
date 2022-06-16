@@ -107,7 +107,11 @@ $ docker-compose up
 <li> Delete a car
   
 ```bash
-to fix
+{
+	deleteCar(id: 9) {
+    brand,
+  }
+}
 
 ```
 

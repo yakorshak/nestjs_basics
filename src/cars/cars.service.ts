@@ -16,7 +16,7 @@ export class CarsService {
     private driversService: DriversService,
   ) {}
 
-  // async?
+  // async when there is few requests into DB, or while each request?
 
   async findAll(): Promise<Car[]> {
     return this.carsRepository.find();
@@ -46,6 +46,7 @@ export class CarsService {
   }
 
   // : Promise<any> ??
+  // : Promise<Car>
   async deleteCar(id: number) {
     const carToDelete = await this.carsRepository.findOneOrFail({
       where: { id },

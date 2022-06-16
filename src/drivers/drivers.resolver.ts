@@ -19,8 +19,8 @@ export class DriversResolver {
     return this.driverService.findOne(id);
   }
 
-  @Query((returns) => [Driver])
-  test(@Args('carId', { type: () => Int }) carId: number): Promise<Driver[]> {
-    return this.driverService.findDrivers(carId);
-  }
+  // @Query((returns) => [Driver])
+  // test(@Args('carId', { type: () => Int }) carId: number): Promise<Driver[]> {
+  //   return this.driverService.findDrivers(carId);
+  // }
 }
