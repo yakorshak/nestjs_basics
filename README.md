@@ -116,4 +116,4 @@ $ docker-compose up
 ```
 
 ## Stay in touch
-Always
+Always in touch
