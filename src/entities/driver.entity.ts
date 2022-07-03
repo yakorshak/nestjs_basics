@@ -22,5 +22,5 @@ export class Driver {
   // where it is placed into our DB?
   @ManyToOne(() => Car, (car) => car.drivers, { onDelete: 'CASCADE' })
   @Field((type) => Car, { nullable: true })
-  car: Car;
+  car?: Car;
 }

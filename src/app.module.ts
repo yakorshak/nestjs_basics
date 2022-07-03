@@ -9,19 +9,9 @@ import { join } from 'path';
 import { DriversModule } from './drivers/drivers.module';
 import { Driver } from './entities/driver.entity';
 import { Car } from './entities/car.entity';
+import { GraphqlModule } from './api/graphql/graphql.module';
+import { ShopModule } from './domain/shop/shop.module';
 
-console.log({
-  type: 'mysql',
-  host: process.env.DB_SERVER || '127.0.0.1',
-  port: 3306,
-  username: 'root',
-  password: 'root',
-  database: 'mysql',
-  entities: [Car, Driver],
-  synchronize: true,
-});
-
-console.log(process.env);
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -31,6 +21,7 @@ console.log(process.env);
       username: 'root',
       password: 'root',
       database: 'mysql',
+      autoLoadEntities: true,
       entities: [Car, Driver],
       synchronize: true,
     }),
@@ -40,6 +31,9 @@ console.log(process.env);
     }),
     CarsModule,
     DriversModule,
+    //----///
+    GraphqlModule,
+    ShopModule,
   ],
   controllers: [AppController],
   providers: [AppService],

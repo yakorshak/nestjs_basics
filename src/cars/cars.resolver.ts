@@ -38,7 +38,7 @@ export class CarsResolver {
     return this.carsService.updateCar(id, data);
   }
 
-  @Mutation((returns) => Car)
+  @Mutation(() => Car)
   createCar(
     @Args('createCarInput') createCarInput: CreateCarInput,
   ): Promise<Car> {
