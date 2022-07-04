@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Args, Int } from '@nestjs/graphql';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DriversService } from 'src/drivers/drivers.service';
+import { DriversService } from 'src/domain/drivers/drivers.service';
 import { Car } from 'src/entities/car.entity';
-import { Driver } from 'src/entities/driver.entity';
+import { Driver } from 'src/domain/drivers/entities/driver.entity';
 import { Repository } from 'typeorm';
 import { CreateCarInput } from './dto/create-car.input';
 import { updateCarInput } from './dto/update-car.input';

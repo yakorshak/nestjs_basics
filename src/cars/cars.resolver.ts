@@ -9,7 +9,7 @@ import {
 } from '@nestjs/graphql';
 
 import { Car } from 'src/entities/car.entity';
-import { Driver } from 'src/entities/driver.entity';
+import { Driver } from 'src/domain/drivers/entities/driver.entity';
 import { CarsService } from './cars.service';
 import { CreateCarInput } from './dto/create-car.input';
 import { updateCarInput } from './dto/update-car.input';

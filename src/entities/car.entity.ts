@@ -1,6 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { DriversModel } from 'src/api/graphql/commons/drivers.model';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Driver } from './driver.entity';
+import { Driver } from '../domain/drivers/entities/driver.entity';
 
 @Entity()
 @ObjectType()
@@ -19,6 +20,6 @@ export class Car {
 
   // where it is placed into our DB?
   @OneToMany(() => Driver, (drivers) => drivers.car)
-  @Field((type) => [Driver], { nullable: true })
+  @Field((type) => [DriversModel], { nullable: true })
   drivers?: Driver[];
 }
