@@ -1,21 +1,21 @@
 import { Args, Int, Mutation, Resolver, Query } from '@nestjs/graphql';
-import { Driver } from 'src/domain/drivers/entities/driver.entity';
-import { DriversService } from '../../../domain/drivers/drivers.service';
-import { DriversModel } from '../commons/drivers.model';
+import { Driver } from 'src/domain/driver/entities/driver.entity';
+import { DriverService } from '../../../domain/driver/driver.service';
+import { DriverModel } from '../commons/driver.model';
 import { CreateDriverInput } from '../dto/create-driver.input';
 
-@Resolver(() => DriversModel)
-export class DriversResolver {
-  constructor(private driverService: DriversService) {}
+@Resolver(() => DriverModel)
+export class DriverResolver {
+  constructor(private driverService: DriverService) {}
 
-  @Mutation(() => DriversModel)
+  @Mutation(() => DriverModel)
   createDriver(
     @Args('createDriverInput') createDriverInput: CreateDriverInput,
   ): Promise<Driver> {
     return this.driverService.createDriver(createDriverInput);
   }
 
-  @Query(() => DriversModel, { name: 'driver' })
+  @Query(() => DriverModel, { name: 'driver' })
   findDriver(@Args('id', { type: () => Int }) id: number) {
     return this.driverService.findOne(id);
   }

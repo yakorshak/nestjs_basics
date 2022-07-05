@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Driver } from 'src/domain/drivers/entities/driver.entity';
+import { Driver } from 'src/domain/driver/entities/driver.entity';
 import { Repository } from 'typeorm';
 import { CreateDriverInput } from '../../api/graphql/dto/create-driver.input';
 
 @Injectable()
-export class DriversService {
+export class DriverService {
   constructor(
     @InjectRepository(Driver) private driversRepository: Repository<Driver>,
   ) {}

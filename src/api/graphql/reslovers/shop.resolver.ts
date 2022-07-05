@@ -8,7 +8,6 @@ import { CreateShopInput } from '../dto/create-shop.input';
 export class ShopResolver {
   constructor(private shopService: ShopService) {}
 
-  //ShopModel?
   @Mutation(() => ShopModel)
   createShop(
     @Args('createShopInput') createShopInput: CreateShopInput,
