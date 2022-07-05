@@ -1,19 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { Args, Int } from '@nestjs/graphql';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DriversService } from 'src/domain/drivers/drivers.service';
-import { Car } from 'src/entities/car.entity';
-import { Driver } from 'src/domain/drivers/entities/driver.entity';
+import { DriverService } from 'src/domain/driver/driver.service';
+import { Car } from 'src/domain/car/entities/car.entity';
+import { Driver } from 'src/domain/driver/entities/driver.entity';
 import { Repository } from 'typeorm';
-import { CreateCarInput } from './dto/create-car.input';
-import { updateCarInput } from './dto/update-car.input';
+import { CreateCarInput } from '../../api/graphql/dto/create-car.input';
+import { updateCarInput } from '../../api/graphql/dto/update-car.input';
 
 @Injectable()
-export class CarsService {
+export class CarService {
   constructor(
     @InjectRepository(Car)
     private carsRepository: Repository<Car>,
-    private driversService: DriversService,
+    private driversService: DriverService,
   ) {}
 
   // async when there is few requests into DB, or while each request?

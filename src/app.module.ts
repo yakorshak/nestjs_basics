@@ -2,13 +2,13 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CarsModule } from './cars/cars.module';
-import { Driver } from './domain/drivers/entities/driver.entity';
-import { Car } from './entities/car.entity';
+import { CarModule } from './domain/car/car.module';
+import { Driver } from './domain/driver/entities/driver.entity';
+import { Car } from './domain/car/entities/car.entity';
 import { GraphqlModule } from './api/graphql/graphql.module';
 import { ShopModule } from './domain/shop/shop.module';
 import { ShopEntity } from './domain/shop/entities/shop.entity';
-import { DriversModule } from './domain/drivers/drivers.module';
+import { DriverModule } from './domain/driver/driver.module';
 
 @Module({
   imports: [
@@ -27,9 +27,8 @@ import { DriversModule } from './domain/drivers/drivers.module';
     //   driver: ApolloDriver,
     //   autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     // }),
-    CarsModule,
-    DriversModule,
-    //----///
+    CarModule,
+    DriverModule,
     GraphqlModule,
     ShopModule,
   ],
