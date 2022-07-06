@@ -2,42 +2,41 @@ import { Injectable } from '@nestjs/common';
 import { Args, Int } from '@nestjs/graphql';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DriverService } from 'src/domain/driver/driver.service';
-import { Car } from 'src/domain/car/entities/car.entity';
-import { Driver } from 'src/domain/driver/entities/driver.entity';
+import { CarEntity } from 'src/domain/car/entities/car.entity';
 import { Repository } from 'typeorm';
-import { CreateCarInput } from '../../api/graphql/dto/create-car.input';
-import { updateCarInput } from '../../api/graphql/dto/update-car.input';
+import { IDriver } from '../driver/interfaces/driver.interfaces';
+import { ICar, ICarCreate, ICarUpdateData } from './interfaces/car.interfaces';
 
 @Injectable()
 export class CarService {
   constructor(
-    @InjectRepository(Car)
-    private carsRepository: Repository<Car>,
+    @InjectRepository(CarEntity)
+    private carsRepository: Repository<CarEntity>,
     private driversService: DriverService,
   ) {}
 
   // async when there is few requests into DB, or while each request?
 
-  async findAll(): Promise<Car[]> {
+  async findAll(): Promise<ICar[]> {
     return this.carsRepository.find();
   }
 
-  async createCar(createCarInput: CreateCarInput): Promise<Car> {
+  async createCar(createCarInput: ICarCreate): Promise<ICar> {
     const newCar = this.carsRepository.create(createCarInput);
     return this.carsRepository.save(newCar);
   }
 
-  async getCar(id: number): Promise<Car> {
+  async getCar(id: number): Promise<ICar> {
     return this.carsRepository.findOneOrFail(id);
   }
 
   async getDrivers(
     @Args('carId', { type: () => Int }) carId,
-  ): Promise<Driver[]> {
+  ): Promise<IDriver[]> {
     return this.driversService.findDrivers(carId);
   }
 
-  async updateCar(id: number, updateCarInput: updateCarInput): Promise<Car> {
+  async updateCar(id: number, updateCarInput: ICarUpdateData): Promise<ICar> {
     const updatedCar = await this.carsRepository.findOneOrFail({
       where: { id },
     });

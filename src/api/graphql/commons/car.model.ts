@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Driver } from 'src/domain/driver/entities/driver.entity';
+import { IDriver } from 'src/domain/driver/interfaces/driver.interfaces';
 import { DriverModel } from './driver.model';
 
 @ObjectType()
@@ -14,5 +14,5 @@ export class CarModel {
   color: string;
 
   @Field((type) => [DriverModel], { nullable: true })
-  drivers: Driver[];
+  drivers: IDriver[];
 }

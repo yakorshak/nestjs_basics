@@ -1,5 +1,5 @@
 import { Args, Int, Mutation, Resolver, Query } from '@nestjs/graphql';
-import { Driver } from 'src/domain/driver/entities/driver.entity';
+import { IDriver } from 'src/domain/driver/interfaces/driver.interfaces';
 import { DriverService } from '../../../domain/driver/driver.service';
 import { DriverModel } from '../commons/driver.model';
 import { CreateDriverInput } from '../dto/create-driver.input';
@@ -11,7 +11,7 @@ export class DriverResolver {
   @Mutation(() => DriverModel)
   createDriver(
     @Args('createDriverInput') createDriverInput: CreateDriverInput,
-  ): Promise<Driver> {
+  ): Promise<IDriver> {
     return this.driverService.createDriver(createDriverInput);
   }
 

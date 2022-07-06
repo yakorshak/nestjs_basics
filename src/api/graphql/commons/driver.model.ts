@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Car } from 'src/domain/car/entities/car.entity';
+import { ICar } from 'src/domain/car/interfaces/car.interfaces';
 import { CarModel } from './car.model';
 
 @ObjectType()
@@ -14,5 +14,5 @@ export class DriverModel {
   carId: number;
 
   @Field(() => CarModel, { nullable: true })
-  car?: Car;
+  car?: ICar;
 }
