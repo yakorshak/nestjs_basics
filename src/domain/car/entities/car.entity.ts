@@ -1,8 +1,10 @@
+import { IDriver } from 'src/domain/driver/interfaces/driver.interfaces';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Driver } from '../../driver/entities/driver.entity';
+import { DriverEntity } from '../../driver/entities/driver.entity';
+import { ICar } from '../interfaces/car.interfaces';
 
 @Entity()
-export class Car {
+export class CarEntity implements ICar {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -12,6 +14,6 @@ export class Car {
   @Column()
   color: string;
 
-  @OneToMany(() => Driver, (drivers) => drivers.car)
-  drivers?: Driver[];
+  @OneToMany(() => DriverEntity, (drivers) => drivers.car)
+  drivers?: IDriver[];
 }

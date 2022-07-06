@@ -1,25 +1,26 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Driver } from 'src/domain/driver/entities/driver.entity';
+import { DriverEntity } from 'src/domain/driver/entities/driver.entity';
 import { Repository } from 'typeorm';
-import { CreateDriverInput } from '../../api/graphql/dto/create-driver.input';
+import { IDriver, IDriverCreate } from './interfaces/driver.interfaces';
 
 @Injectable()
 export class DriverService {
   constructor(
-    @InjectRepository(Driver) private driversRepository: Repository<Driver>,
+    @InjectRepository(DriverEntity)
+    private driversRepository: Repository<DriverEntity>,
   ) {}
 
-  async findOne(id: number): Promise<Driver> {
+  async findOne(id: number): Promise<IDriver> {
     return this.driversRepository.findOneOrFail(id);
   }
 
-  async createDriver(createDriverInput: CreateDriverInput): Promise<Driver> {
+  async createDriver(createDriverInput: IDriverCreate): Promise<IDriver> {
     const newDriver = this.driversRepository.create(createDriverInput);
     return this.driversRepository.save(newDriver);
   }
 
-  async findDrivers(carId: number): Promise<Driver[]> {
+  async findDrivers(carId: number): Promise<IDriver[]> {
     return this.driversRepository.find({
       where: { carId: carId },
     });
