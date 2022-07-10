@@ -16,7 +16,7 @@ export class UserResolver {
   }
 
   @Mutation(() => UserModel)
-  findUser(@Args('id', { type: () => Int }) id: number) {
-    return this.userService.findUserById(id);
+  findUser(@Args('username') username: string) {
+    return this.userService.findUser(username);
   }
 }

@@ -37,7 +37,7 @@ type Query {
 type Mutation {
   createShop(createShopInput: CreateShopInput!): ShopModel!
   createUser(createUserInput: CreateUserInput!): UserModel!
-  findUser(id: Int!): UserModel!
+  findUser(username: String!): UserModel!
   updateCar(id: Int!, data: UpdateCarInput!): CarModel!
   createCar(createCarInput: CreateCarInput!): CarModel!
   deleteCar(id: Int!): CarModel!

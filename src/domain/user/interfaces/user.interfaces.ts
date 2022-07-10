@@ -3,7 +3,7 @@ export interface IUserBody {
   password: string;
 }
 
-export interface IUser {
+export interface IUser extends IUserBody {
   id: number;
 }
 

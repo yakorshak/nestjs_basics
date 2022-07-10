@@ -17,8 +17,10 @@ export class UserService {
     return createdUser;
   }
 
-  public async findUserById(id: number): Promise<IUser> {
-    const user = await this.userRepository.findOneOrFail(id);
+  public async findUser(username: string): Promise<IUser> {
+    const user = await this.userRepository.findOneOrFail({
+      where: { username: username },
+    });
     return user;
   }
 }
