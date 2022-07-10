@@ -9,6 +9,8 @@ import { GraphqlModule } from './api/graphql/graphql.module';
 import { ShopModule } from './domain/shop/shop.module';
 import { ShopEntity } from './domain/shop/entities/shop.entity';
 import { DriverModule } from './domain/driver/driver.module';
+import { AuthModule } from './domain/auth/auth.module';
+import { UserModule } from './domain/user/user.module';
 
 @Module({
   imports: [
@@ -20,17 +22,15 @@ import { DriverModule } from './domain/driver/driver.module';
       password: 'root',
       database: 'mysql',
       autoLoadEntities: true,
-      entities: [CarEntity, DriverEntity, ShopEntity],
+      entities: [],
       synchronize: true,
     }),
-    // GraphQLModule.forRoot<ApolloDriverConfig>({
-    //   driver: ApolloDriver,
-    //   autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-    // }),
     CarModule,
     DriverModule,
     GraphqlModule,
     ShopModule,
+    AuthModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

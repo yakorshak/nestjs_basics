@@ -2,35 +2,59 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Car {
-  id: Int!
-  brand: String!
-  color: String!
-  drivers: [Driver!]
-}
-
-type Driver {
+type DriverModel {
   id: Int!
   name: String!
   carId: Int!
-  car: Car
+  car: CarModel
+}
+
+type CarModel {
+  id: Int!
+  brand: String!
+  color: String!
+  drivers: [DriverModel!]
+}
+
+type ShopModel {
+  id: Int!
+  name: String!
+  color: String!
+}
+
+type UserModel {
+  id: Int!
+  username: String!
+  password: String!
 }
 
 type Query {
-  getAllCars: [Car!]!
-  getCar(id: Int!): Car!
-  driver(id: Int!): Driver!
-  test(carId: Int!): [Driver!]!
+  getAllCars: [CarModel!]!
+  getCar(id: Int!): CarModel!
+  driver(id: Int!): DriverModel!
 }
 
 type Mutation {
-  updateCar(id: Int!, data: updateCarInput!): Car!
-  createCar(createCarInput: CreateCarInput!): Car!
-  deleteCar(id: Int!): Car!
-  createDriver(createDriverInput: CreateDriverInput!): Driver!
+  createShop(createShopInput: CreateShopInput!): ShopModel!
+  createUser(createUserInput: CreateUserInput!): UserModel!
+  findUser(id: Int!): UserModel!
+  updateCar(id: Int!, data: UpdateCarInput!): CarModel!
+  createCar(createCarInput: CreateCarInput!): CarModel!
+  deleteCar(id: Int!): CarModel!
+  createDriver(createDriverInput: CreateDriverInput!): DriverModel!
 }
 
-input updateCarInput {
+input CreateShopInput {
+  name: String!
+  color: String!
+}
+
+input CreateUserInput {
+  username: String!
+  password: String!
+}
+
+input UpdateCarInput {
   brand: String!
   color: String!
 }
