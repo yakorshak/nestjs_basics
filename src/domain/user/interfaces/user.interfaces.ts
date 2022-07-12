@@ -7,4 +7,9 @@ export interface IUser extends IUserBody {
   id: number;
 }
 
+export interface IUserLogged {
+  id: number;
+  username: string;
+}
+
 export type IUserCreate = IUserBody;

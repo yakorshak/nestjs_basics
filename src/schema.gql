@@ -2,6 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type LoginResponseDTO {
+  id: Int!
+  username: String!
+}
+
 type DriverModel {
   id: Int!
   name: String!
@@ -42,6 +47,7 @@ type Mutation {
   createCar(createCarInput: CreateCarInput!): CarModel!
   deleteCar(id: Int!): CarModel!
   createDriver(createDriverInput: CreateDriverInput!): DriverModel!
+  login(loginUserInput: LoginUserInput!): LoginResponseDTO!
 }
 
 input CreateShopInput {
@@ -67,4 +73,9 @@ input CreateCarInput {
 input CreateDriverInput {
   name: String!
   carId: Int!
+}
+
+input LoginUserInput {
+  username: String!
+  password: String!
 }

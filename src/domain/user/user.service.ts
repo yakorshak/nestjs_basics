@@ -3,6 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from './entities/user.entity';
 import { IUser, IUserCreate } from './interfaces/user.interfaces';
+import * as bcrypt from 'bcrypt';
+
+// регистрация
+// хешировать пароль (bcrypt)
 
 @Injectable()
 export class UserService {
@@ -12,12 +16,15 @@ export class UserService {
   ) {}
 
   public async createUser(input: IUserCreate): Promise<IUser> {
+    const { password } = input;
+    const hashPassword = await bcrypt.hashSync(password, 7);
+    input.password = hashPassword;
     const user = await this.userRepository.create(input);
     const createdUser = await this.userRepository.save(user);
     return createdUser;
   }
 
-  public async findUser(username: string): Promise<IUser> {
+  public async findUser(username: string): Promise<IUser | undefined> {
     const user = await this.userRepository.findOneOrFail({
       where: { username: username },
     });
