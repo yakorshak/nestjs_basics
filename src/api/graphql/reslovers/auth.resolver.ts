@@ -12,10 +12,7 @@ export class AuthResolver {
 
   @Mutation(() => LoginResponseDTO)
   @UseGuards(GqlAuthGuard, ActivateSession)
-  login(
-    @Args('loginUserInput') loginUserInput: LoginUserInput,
-    @Req() req,
-  ): Promise<any> {
-    return this.authService.login(loginUserInput, req);
+  login(@Args('loginUserInput') loginUserInput: LoginUserInput): Promise<any> {
+    return this.authService.login(loginUserInput);
   }
 }

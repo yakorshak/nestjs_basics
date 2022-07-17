@@ -27,10 +27,10 @@ export class AuthService {
     return null;
   }
 
-  async login(loginUserInput: LoginUserInput, req): Promise<IUserLogged> {
+  async login(loginUserInput: LoginUserInput): Promise<IUserLogged> {
     const user = await this.userService.findUser(loginUserInput.username);
     const { password, ...result } = user;
-    console.log(req);
+    console.log('!!!');
     return result;
     // return {
     //   sessionId,

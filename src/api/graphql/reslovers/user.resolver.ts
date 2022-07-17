@@ -1,4 +1,4 @@
-import { UseGuards } from '@nestjs/common';
+import { Query, UseGuards } from '@nestjs/common';
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
 import { IsAuthGuard } from 'src/domain/auth/guards/isAuth.guard';
 import { IUser } from 'src/domain/user/interfaces/user.interfaces';
@@ -20,5 +20,11 @@ export class UserResolver {
   @Mutation(() => UserModel)
   findUser(@Args('username') username: string) {
     return this.userService.findUser(username);
+  }
+
+  @UseGuards(IsAuthGuard)
+  @Mutation(() => [UserModel])
+  findAllUsers(): Promise<IUser[]> {
+    return this.userService.findAllUsers();
   }
 }

@@ -22,7 +22,6 @@ export class CarResolver {
   constructor(private carsService: CarService) {}
 
   @Query((returns) => [CarModel])
-  @UseGuards(IsAuthGuard)
   getAllCars(): Promise<ICar[]> {
     return this.carsService.findAll();
   }

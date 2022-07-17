@@ -13,6 +13,7 @@ async function bootstrap() {
       secret: 'gefhwk12', // get env vars
       resave: false,
       saveUninitialized: false,
+      cookie: { maxAge: 10000 },
     }),
   );
   app.use(passport.initialize());
