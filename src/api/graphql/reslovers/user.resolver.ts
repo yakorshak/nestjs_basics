@@ -1,4 +1,6 @@
+import { UseGuards } from '@nestjs/common';
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
+import { IsAuthGuard } from 'src/domain/auth/guards/isAuth.guard';
 import { IUser } from 'src/domain/user/interfaces/user.interfaces';
 import { UserService } from 'src/domain/user/user.service';
 import { UserModel } from '../commons/user.model';

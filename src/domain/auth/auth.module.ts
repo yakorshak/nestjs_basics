@@ -3,11 +3,28 @@ import { UserModule } from '../user/user.module';
 import { AuthService } from './auth.service';
 import { LocalStrategy } from './local.strategy';
 import { PassportModule } from '@nestjs/passport';
-import { GqlAuthGuard } from './auth-gql.guard';
+import { GqlAuthGuard } from './guards/auth-gql.guard';
+import { IsAuthGuard } from './guards/isAuth.guard';
+import { SessionSerializer } from './session.serializer';
+import { ActivateSession } from './guards/activate-session.guard';
 
 @Module({
-  imports: [UserModule, PassportModule],
-  providers: [AuthService, LocalStrategy, GqlAuthGuard],
-  exports: [AuthService, GqlAuthGuard, LocalStrategy],
+  imports: [UserModule, PassportModule.register({ session: true })],
+  providers: [
+    AuthService,
+    LocalStrategy,
+    GqlAuthGuard,
+    IsAuthGuard,
+    SessionSerializer,
+    ActivateSession,
+  ],
+  exports: [
+    AuthService,
+    GqlAuthGuard,
+    LocalStrategy,
+    IsAuthGuard,
+    ActivateSession,
+    SessionSerializer,
+  ],
 })
 export class AuthModule {}
