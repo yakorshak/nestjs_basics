@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UseGuards } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DriverEntity } from 'src/domain/driver/entities/driver.entity';
 import { Repository } from 'typeorm';
+import { IsAuthGuard } from '../auth/guards/isAuth.guard';
 import { IDriver, IDriverCreate } from './interfaces/driver.interfaces';
 
 @Injectable()

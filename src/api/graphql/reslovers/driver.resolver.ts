@@ -1,4 +1,6 @@
+import { UseGuards } from '@nestjs/common';
 import { Args, Int, Mutation, Resolver, Query } from '@nestjs/graphql';
+import { IsAuthGuard } from 'src/domain/auth/guards/isAuth.guard';
 import { IDriver } from 'src/domain/driver/interfaces/driver.interfaces';
 import { DriverService } from '../../../domain/driver/driver.service';
 import { DriverModel } from '../commons/driver.model';
@@ -9,6 +11,7 @@ export class DriverResolver {
   constructor(private driverService: DriverService) {}
 
   @Mutation(() => DriverModel)
+  @UseGuards(IsAuthGuard)
   createDriver(
     @Args('createDriverInput') createDriverInput: CreateDriverInput,
   ): Promise<IDriver> {

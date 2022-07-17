@@ -1,3 +1,4 @@
+import { UseGuards } from '@nestjs/common';
 import {
   Args,
   Int,
@@ -7,7 +8,7 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-
+import { IsAuthGuard } from 'src/domain/auth/guards/isAuth.guard';
 import { ICar } from 'src/domain/car/interfaces/car.interfaces';
 import { IDriver } from 'src/domain/driver/interfaces/driver.interfaces';
 import { CarService } from '../../../domain/car/car.service';
@@ -21,6 +22,7 @@ export class CarResolver {
   constructor(private carsService: CarService) {}
 
   @Query((returns) => [CarModel])
+  @UseGuards(IsAuthGuard)
   getAllCars(): Promise<ICar[]> {
     return this.carsService.findAll();
   }

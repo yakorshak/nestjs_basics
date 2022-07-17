@@ -2,7 +2,8 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class LoginResponseDTO {
-  //sessionId
+  @Field()
+  sessionID: string;
 
   @Field(() => Int)
   id: number;
