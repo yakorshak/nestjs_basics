@@ -18,6 +18,12 @@ import { UserResolver } from './reslovers/user.resolver';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      playground: {
+        settings: {
+          'editor.theme': 'light', // use value dark if you want a dark theme in the playground
+          'request.credentials': 'include',
+        },
+      },
     }),
     ShopModule,
     UserModule,
