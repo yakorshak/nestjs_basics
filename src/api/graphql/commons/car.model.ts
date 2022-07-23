@@ -13,6 +13,6 @@ export class CarModel {
   @Field()
   color: string;
 
-  @Field((type) => [DriverModel], { nullable: true })
+  @Field(() => [DriverModel], { nullable: true })
   drivers: IDriver[];
 }

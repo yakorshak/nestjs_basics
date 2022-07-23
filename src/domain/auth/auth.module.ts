@@ -8,6 +8,7 @@ import { IsAuthGuard } from './guards/isAuth.guard';
 import { SessionSerializer } from './session.serializer';
 import { ActivateSession } from './guards/activate-session.guard';
 import { RolesGuard } from './guards/roles.guard';
+import { LogoutGuard } from './guards/logout.guard';
 
 @Module({
   imports: [UserModule, PassportModule.register({ session: true })],
@@ -19,14 +20,15 @@ import { RolesGuard } from './guards/roles.guard';
     SessionSerializer,
     ActivateSession,
     RolesGuard,
+    LogoutGuard,
   ],
   exports: [
     AuthService,
-    GqlAuthGuard,
-    LocalStrategy,
-    IsAuthGuard,
-    ActivateSession,
-    SessionSerializer,
+    // GqlAuthGuard,
+    // LocalStrategy,
+    // IsAuthGuard,
+    // ActivateSession,
+    // SessionSerializer,
   ],
 })
 export class AuthModule {}

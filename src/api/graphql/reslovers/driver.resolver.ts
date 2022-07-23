@@ -22,13 +22,10 @@ export class DriverResolver {
     return this.driverService.createDriver(createDriverInput);
   }
 
-  @Query(() => DriverModel, { name: 'driver' })
+  @UseGuards(IsAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
+  @Query(() => DriverModel, { name: 'findDriver' })
   findDriver(@Args('id', { type: () => Int }) id: number) {
     return this.driverService.findOne(id);
   }
-
-  // @Query((returns) => [Driver])
-  // test(@Args('carId', { type: () => Int }) carId: number): Promise<Driver[]> {
-  //   return this.driverService.findDrivers(carId);
-  // }
 }

@@ -7,13 +7,12 @@ import * as passport from 'passport';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // использовать с документации сохранение сессии в ДБ
   app.use(
     session({
       secret: 'gefhwk12', // get env vars
       resave: false,
       saveUninitialized: false,
-      cookie: { maxAge: 10000 },
+      cookie: { maxAge: 600000 }, // 10 minutes
     }),
   );
   app.use(passport.initialize());

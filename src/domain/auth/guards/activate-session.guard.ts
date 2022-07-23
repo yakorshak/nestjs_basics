@@ -23,7 +23,6 @@ export class ActivateSession extends AuthGuard('local') {
   async canActivate(context: ExecutionContext) {
     const req = GqlExecutionContext.create(context).getContext().req;
     await super.logIn(req);
-    console.log(req);
     return req;
   }
 }

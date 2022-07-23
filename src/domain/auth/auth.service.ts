@@ -11,7 +11,6 @@ import { IUser, IUserLogged } from '../user/interfaces/user.interfaces';
 // после вернуть авторизационный токен (вернуть в куки)
 // перед каждым эндпоинтом проверка авторизации (есть ли юзер, его токен)
 // Guard - проверка над эндпоинтом
-// авторизация имеет ли доступ к эндпоинту
 
 @Injectable()
 export class AuthService {
@@ -30,11 +29,6 @@ export class AuthService {
   async login(loginUserInput: LoginUserInput): Promise<IUserLogged> {
     const user = await this.userService.findUser(loginUserInput.username);
     const { password, ...result } = user;
-    console.log('!!!');
     return result;
-    // return {
-    //   sessionId,
-    //   user
-    // }
   }
 }

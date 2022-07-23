@@ -35,10 +35,16 @@ type UserModel {
   roles: String!
 }
 
+type LogOutUserDTO {
+  Message: String!
+}
+
 type Query {
+  """logout to the system"""
+  logoutUser: LogOutUserDTO!
   getAllCars: [CarModel!]!
   getCar(id: Int!): CarModel!
-  driver(id: Int!): DriverModel!
+  findDriver(id: Int!): DriverModel!
 }
 
 type Mutation {
