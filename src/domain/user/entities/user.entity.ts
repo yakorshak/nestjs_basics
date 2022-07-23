@@ -1,3 +1,4 @@
+import { Role } from 'src/domain/auth/enums/role.enum';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { IUser } from '../interfaces/user.interfaces';
 
@@ -11,4 +12,11 @@ export class UserEntity implements IUser {
 
   @Column()
   password: string;
+
+  @Column({
+    type: 'enum',
+    enum: Role,
+    default: Role.Admin,
+  })
+  roles: Role;
 }

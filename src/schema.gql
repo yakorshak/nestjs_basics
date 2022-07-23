@@ -32,6 +32,7 @@ type UserModel {
   id: Int!
   username: String!
   password: String!
+  roles: String!
 }
 
 type Query {
