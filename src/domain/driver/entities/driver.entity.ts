@@ -14,7 +14,6 @@ export class DriverEntity implements IDriver {
   @Column()
   carId: number;
 
-  // where it is placed into our DB?
   @ManyToOne(() => CarEntity, (car) => car.drivers, { onDelete: 'CASCADE' })
   car?: ICar;
 }

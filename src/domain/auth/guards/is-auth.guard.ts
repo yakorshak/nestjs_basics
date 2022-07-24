@@ -7,9 +7,11 @@ export class IsAuthGuard implements CanActivate {
     const ctx = GqlExecutionContext.create(context);
     const request = ctx.getContext().req;
     const authStatus = request.isAuthenticated();
+
     if (authStatus) {
       return authStatus;
     }
+
     return false;
   }
 }

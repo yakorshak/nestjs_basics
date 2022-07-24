@@ -15,14 +15,13 @@ export class CarService {
     private driversService: DriverService,
   ) {}
 
-  // async when there is few requests into DB, or while each request?
-
   async findAll(): Promise<ICar[]> {
     return this.carsRepository.find();
   }
 
   async createCar(createCarInput: ICarCreate): Promise<ICar> {
     const newCar = this.carsRepository.create(createCarInput);
+
     return this.carsRepository.save(newCar);
   }
 
@@ -40,20 +39,18 @@ export class CarService {
     const updatedCar = await this.carsRepository.findOneOrFail({
       where: { id },
     });
+
     Object.assign(updatedCar, updateCarInput);
+
     return await this.carsRepository.save(updatedCar);
   }
 
-  // : Promise<any> ??
-  // : Promise<Car>
+  // put return type
   async deleteCar(id: number) {
     const carToDelete = await this.carsRepository.findOneOrFail({
       where: { id },
     });
-    // cascade?
-    // if (carToDelete.drivers) {
-    //   this.driversService.deleteDrivers(id);
-    // }
+
     return await this.carsRepository.remove(carToDelete);
   }
 }

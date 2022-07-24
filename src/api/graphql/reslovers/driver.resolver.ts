@@ -1,12 +1,12 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Int, Mutation, Resolver, Query } from '@nestjs/graphql';
-import { IsAuthGuard } from 'src/domain/auth/guards/isAuth.guard';
+import { IsAuthGuard } from 'src/domain/auth/guards/is-auth.guard';
 import { IDriver } from 'src/domain/driver/interfaces/driver.interfaces';
 import { Roles } from 'src/domain/auth/decorators/role.decorator';
 import { Role } from 'src/domain/auth/enums/role.enum';
 import { DriverService } from '../../../domain/driver/driver.service';
 import { DriverModel } from '../commons/driver.model';
-import { CreateDriverInput } from '../dto/create-driver.input';
+import { CreateDriverDTO } from '../dto/create-driver.input';
 import { RolesGuard } from 'src/domain/auth/guards/roles.guard';
 
 @Resolver(() => DriverModel)
@@ -17,7 +17,7 @@ export class DriverResolver {
   @UseGuards(IsAuthGuard, RolesGuard)
   @Roles(Role.Admin)
   createDriver(
-    @Args('createDriverInput') createDriverInput: CreateDriverInput,
+    @Args('createDriverInput') createDriverInput: CreateDriverDTO,
   ): Promise<IDriver> {
     return this.driverService.createDriver(createDriverInput);
   }

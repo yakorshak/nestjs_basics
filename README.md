@@ -4,7 +4,6 @@ This is application called 'Cars register'
 
 ## Technologies
 
-
 <li> Node.js using Nest.js framework
 <li> MySQL 5.7
 <li> TypeORM
@@ -21,15 +20,90 @@ $ docker-compose up
 ```
 
 ## Functionality
+<li> Create (register) a user
+<li> Log in (using passport-local strategy)
+<li> Log out
+<li> Find all users
+<li> Find a user by 'id'
 <li> Create a car
 <li> Create a driver 
 <i> (the driver should be assigned to any car) <i>
+<li> Find a driver by 'id'
 <li> Find all cars and related drivers to them
 <li> Find a car using 'id' and related drivers to the car
 <li> Update a car properties
 <li> Remove a car
 
 ## Example of requests:
+
+<li> Create (register) a user
+  
+```bash
+mutation {
+  createUser(createUserInput: {
+    username: "Neo",
+    password: "Matrix"
+  }) {
+    id,
+    username,
+    password,
+  }
+}
+
+```
+
+<li> Log in
+  
+```bash
+mutation {
+  login(loginUserInput: {
+    username: "Kyrylo",
+    password: "Matrix"
+  }) {
+    username,
+    id,
+  }
+}
+
+```
+
+<li> Log out
+  
+```bash
+query {
+  logoutUser{
+    Message
+  }
+}
+
+```
+
+<li> Find all users
+  
+```bash
+query {
+  findAllUsers {
+    id,
+    username,
+    password,
+    roles,
+  }
+}
+
+```
+
+<li> Find a user by id
+  
+```bash
+query {
+  findUser(username: "Sam") {
+    id,
+    username,
+  }
+}
+
+```
+
 <li> Create a car
   
 ```bash
@@ -55,6 +129,18 @@ $ docker-compose up
   }) {
     name,
     carId
+  }
+}
+
+```
+<li> Find a driver by id
+  
+```bash
+query {
+  findDriver(id: 11)
+  {
+    name,
+    carId,
   }
 }
 

@@ -6,9 +6,6 @@ import { IUser, IUserCreate } from './interfaces/user.interfaces';
 import * as bcrypt from 'bcrypt';
 import { Role } from '../auth/enums/role.enum';
 
-// регистрация
-// хешировать пароль (bcrypt)
-
 @Injectable()
 export class UserService {
   constructor(
@@ -21,8 +18,10 @@ export class UserService {
     const hashPassword = await bcrypt.hashSync(password, 7);
     input.password = hashPassword;
     const user = await this.userRepository.create(input);
+
     user.roles = Role.Admin;
     const createdUser = await this.userRepository.save(user);
+
     return createdUser;
   }
 
@@ -30,11 +29,13 @@ export class UserService {
     const user = await this.userRepository.findOne({
       where: { username: username },
     });
+
     return user;
   }
 
   public async findAllUsers(): Promise<IUser[]> {
     const allUsers = await this.userRepository.find();
+
     return allUsers;
   }
 }

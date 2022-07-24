@@ -42,49 +42,49 @@ type LogOutUserDTO {
 type Query {
   """logout to the system"""
   logoutUser: LogOutUserDTO!
+  findUser(username: String!): UserModel!
+  findAllUsers: [UserModel!]!
   getAllCars: [CarModel!]!
   getCar(id: Int!): CarModel!
   findDriver(id: Int!): DriverModel!
 }
 
 type Mutation {
-  createShop(createShopInput: CreateShopInput!): ShopModel!
-  createUser(createUserInput: CreateUserInput!): UserModel!
-  findUser(username: String!): UserModel!
-  findAllUsers: [UserModel!]!
-  updateCar(id: Int!, data: UpdateCarInput!): CarModel!
-  createCar(createCarInput: CreateCarInput!): CarModel!
+  createShop(createShopInput: CreateShopDTO!): ShopModel!
+  createUser(createUserInput: CreateUserDTO!): UserModel!
+  updateCar(id: Int!, data: UpdateCarDTO!): CarModel!
+  createCar(createCarInput: CreateCarDTO!): CarModel!
   deleteCar(id: Int!): CarModel!
-  createDriver(createDriverInput: CreateDriverInput!): DriverModel!
-  login(loginUserInput: LoginUserInput!): LoginResponseDTO!
+  createDriver(createDriverInput: CreateDriverDTO!): DriverModel!
+  login(loginUserInput: LoginUserDTO!): LoginResponseDTO!
 }
 
-input CreateShopInput {
+input CreateShopDTO {
   name: String!
   color: String!
 }
 
-input CreateUserInput {
+input CreateUserDTO {
   username: String!
   password: String!
 }
 
-input UpdateCarInput {
+input UpdateCarDTO {
   brand: String!
   color: String!
 }
 
-input CreateCarInput {
+input CreateCarDTO {
   brand: String!
   color: String
 }
 
-input CreateDriverInput {
+input CreateDriverDTO {
   name: String!
   carId: Int!
 }
 
-input LoginUserInput {
+input LoginUserDTO {
   username: String!
   password: String!
 }

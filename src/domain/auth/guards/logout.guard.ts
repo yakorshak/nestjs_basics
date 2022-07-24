@@ -9,9 +9,11 @@ export class LogoutGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const ctx = GqlExecutionContext.create(context);
     const req = ctx.getContext().req;
+
     if (!req.user) {
       throw new UnauthorizedException();
     }
+
     await req.logout((err) => {
       if (err) {
         return err;
@@ -19,6 +21,7 @@ export class LogoutGuard implements CanActivate {
         // res.redirect('/'), нужно ли получить доступ к res?
       }
     });
+
     return true;
   }
 }

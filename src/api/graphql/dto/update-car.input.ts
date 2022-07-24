@@ -2,7 +2,7 @@ import { Field, InputType } from '@nestjs/graphql';
 import { IsAlpha } from 'class-validator';
 
 @InputType()
-export class UpdateCarInput {
+export class UpdateCarDTO {
   @IsAlpha()
   @Field()
   brand?: string;
