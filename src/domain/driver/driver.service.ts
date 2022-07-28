@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DriverEntity } from 'src/domain/driver/entities/driver.entity';
 import { Repository } from 'typeorm';
@@ -12,7 +12,11 @@ export class DriverService {
   ) {}
 
   async findOne(id: number): Promise<IDriver> {
-    return this.driversRepository.findOneOrFail(id);
+    const driver = await this.driversRepository.findOne(id);
+    if (!driver) {
+      throw new NotFoundException(`Driver with id #${id} not found`);
+    }
+    return driver;
   }
 
   async createDriver(createDriverInput: IDriverCreate): Promise<IDriver> {
