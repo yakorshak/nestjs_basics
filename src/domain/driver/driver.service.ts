@@ -13,20 +13,22 @@ export class DriverService {
 
   async findOne(id: number): Promise<IDriver> {
     const driver = await this.driversRepository.findOne(id);
+
     if (!driver) {
       throw new NotFoundException(`Driver with id #${id} not found`);
     }
+
     return driver;
   }
 
   async createDriver(createDriverInput: IDriverCreate): Promise<IDriver> {
-    const newDriver = this.driversRepository.create(createDriverInput);
+    const newDriver = await this.driversRepository.create(createDriverInput);
 
     return this.driversRepository.save(newDriver);
   }
 
   async findDrivers(carId: number): Promise<IDriver[]> {
-    return this.driversRepository.find({
+    return await this.driversRepository.find({
       where: { carId: carId },
     });
   }

@@ -22,9 +22,9 @@ export class DriverResolver {
     return this.driverService.createDriver(createDriverInput);
   }
 
+  @Query(() => DriverModel, { name: 'findDriver' })
   @UseGuards(IsAuthGuard, RolesGuard)
   @Roles(Role.Admin)
-  @Query(() => DriverModel, { name: 'findDriver' })
   findDriver(@Args('id', { type: () => Int }) id: number) {
     return this.driverService.findOne(id);
   }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Args, Int } from '@nestjs/graphql';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DriverService } from 'src/domain/driver/driver.service';
@@ -16,7 +16,7 @@ export class CarService {
   ) {}
 
   async findAll(): Promise<ICar[]> {
-    return this.carsRepository.find();
+    return await this.carsRepository.find();
   }
 
   async createCar(createCarInput: ICarCreate): Promise<ICar> {
@@ -26,7 +26,13 @@ export class CarService {
   }
 
   async getCar(id: number): Promise<ICar> {
-    return this.carsRepository.findOneOrFail(id);
+    const car = await this.carsRepository.findOne(id);
+
+    if (!car) {
+      throw new NotFoundException(`Car with id #${id} not found`);
+    }
+
+    return car;
   }
 
   async getDrivers(
@@ -45,11 +51,14 @@ export class CarService {
     return await this.carsRepository.save(updatedCar);
   }
 
-  // put return type
-  async deleteCar(id: number) {
-    const carToDelete = await this.carsRepository.findOneOrFail({
+  async deleteCar(id: number): Promise<any> {
+    const carToDelete = await this.carsRepository.findOne({
       where: { id },
     });
+
+    if (!carToDelete) {
+      throw new NotFoundException(`Car with id #${id} not found`);
+    }
 
     return await this.carsRepository.remove(carToDelete);
   }

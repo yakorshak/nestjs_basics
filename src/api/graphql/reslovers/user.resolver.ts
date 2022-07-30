@@ -1,7 +1,10 @@
 import { UseGuards } from '@nestjs/common';
 import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
+import { Roles } from 'src/domain/auth/decorators/role.decorator';
+import { Role } from 'src/domain/auth/enums/role.enum';
 import { IsAuthGuard } from 'src/domain/auth/guards/is-auth.guard';
 import { LogoutGuard } from 'src/domain/auth/guards/logout.guard';
+import { RolesGuard } from 'src/domain/auth/guards/roles.guard';
 import { IUser } from 'src/domain/user/interfaces/user.interfaces';
 import { UserService } from 'src/domain/user/user.service';
 import { UserModel } from '../commons/user.model';
@@ -31,7 +34,8 @@ export class UserResolver {
     return this.userService.findUser(username);
   }
 
-  @UseGuards(IsAuthGuard)
+  @UseGuards(IsAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   @Query(() => [UserModel])
   findAllUsers(): Promise<IUser[]> {
     return this.userService.findAllUsers();

@@ -1,3 +1,5 @@
+// This module can be considered as 'class work' during my education
+
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ShopEntity } from './entities/shop.entity';
