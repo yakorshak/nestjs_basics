@@ -28,12 +28,15 @@ export class UserResolver {
     return { Message: 'Logout successful' };
   }
 
-  @UseGuards(IsAuthGuard)
+  // only admin
   @Query(() => UserModel)
+  @UseGuards(IsAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   findUser(@Args('username') username: string) {
     return this.userService.findUser(username);
   }
 
+  //only admin
   @UseGuards(IsAuthGuard, RolesGuard)
   @Roles(Role.Admin)
   @Query(() => [UserModel])
