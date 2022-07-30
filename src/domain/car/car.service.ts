@@ -42,9 +42,13 @@ export class CarService {
   }
 
   async updateCar(id: number, updateCarInput: ICarUpdateData): Promise<ICar> {
-    const updatedCar = await this.carsRepository.findOneOrFail({
+    const updatedCar = await this.carsRepository.findOne({
       where: { id },
     });
+
+    if (!updatedCar) {
+      throw new NotFoundException(`Car with id #${id} not found`);
+    }
 
     Object.assign(updatedCar, updateCarInput);
 
