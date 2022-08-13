@@ -3,11 +3,11 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 @ObjectType()
 export class LoginResponseDTO {
   @Field()
-  sessionID?: string;
+  readonly sessionID?: string;
 
   @Field(() => Int)
-  id: number;
+  readonly id: number;
 
   @Field()
-  username: string;
+  readonly username: string;
 }

@@ -5,8 +5,8 @@ import { IsAlpha } from 'class-validator';
 export class CreateDriverDTO {
   @IsAlpha()
   @Field()
-  name: string;
+  readonly name: string;
 
   @Field(() => Int)
-  carId: number;
+  readonly carId: number;
 }

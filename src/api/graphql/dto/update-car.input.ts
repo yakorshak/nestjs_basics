@@ -5,8 +5,8 @@ import { IsAlpha } from 'class-validator';
 export class UpdateCarDTO {
   @IsAlpha()
   @Field()
-  brand?: string;
+  readonly brand?: string;
 
   @Field()
-  color?: string;
+  readonly color?: string;
 }

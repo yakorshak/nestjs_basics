@@ -3,8 +3,8 @@ import { Field, InputType } from '@nestjs/graphql';
 @InputType()
 export class CreateShopDTO {
   @Field()
-  name: string;
+  readonly name: string;
 
   @Field()
-  color: string;
+  readonly color: string;
 }
