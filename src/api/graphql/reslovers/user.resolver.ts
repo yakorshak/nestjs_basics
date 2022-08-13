@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, Query, Int } from '@nestjs/graphql';
 import { Roles } from 'src/domain/auth/decorators/role.decorator';
 import { Role } from 'src/domain/auth/enums/role.enum';
 import { IsAuthGuard } from 'src/domain/auth/guards/is-auth.guard';
@@ -11,10 +11,11 @@ import { UserModel } from '../commons/user.model';
 import { CreateUserDTO } from '../dto/create-user.input';
 import { LogOutUserDTO } from '../dto/logout-user.response';
 
-@Resolver()
+@Resolver(() => UserModel)
 export class UserResolver {
   constructor(private userService: UserService) {}
 
+  // register
   @Mutation(() => UserModel)
   createUser(
     @Args('createUserInput') createUserInput: CreateUserDTO,
@@ -31,16 +32,25 @@ export class UserResolver {
   // only admin
   @Query(() => UserModel)
   @UseGuards(IsAuthGuard, RolesGuard)
-  @Roles(Role.Admin)
+  @Roles(Role.Admin, Role.User)
   findUser(@Args('username') username: string) {
     return this.userService.findUser(username);
   }
 
   //only admin
   @UseGuards(IsAuthGuard, RolesGuard)
-  @Roles(Role.Admin)
+  @Roles(Role.Admin, Role.User)
   @Query(() => [UserModel])
   findAllUsers(): Promise<IUser[]> {
     return this.userService.findAllUsers();
+  }
+
+  @Mutation(() => UserModel)
+  @UseGuards(IsAuthGuard, RolesGuard)
+  @Roles(Role.User)
+  grantAdminRoleById(
+    @Args('ThereIsShouldBeId', { type: () => Int }) userId: number,
+  ) {
+    return this.userService.grantAdminRoleById(userId);
   }
 }

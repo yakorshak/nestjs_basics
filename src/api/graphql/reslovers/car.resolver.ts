@@ -26,21 +26,21 @@ export class CarResolver {
 
   @Query(() => [CarModel])
   @UseGuards(IsAuthGuard, RolesGuard)
-  @Roles(Role.Admin)
+  @Roles(Role.User)
   getAllCars(): Promise<ICar[]> {
     return this.carsService.findAll();
   }
 
   @Query(() => CarModel)
   @UseGuards(IsAuthGuard, RolesGuard)
-  @Roles(Role.Admin)
+  @Roles(Role.User)
   getCar(@Args('id', { type: () => Int }) id: number): Promise<ICar> {
     return this.carsService.getCar(id);
   }
 
   @Mutation(() => CarModel)
   @UseGuards(IsAuthGuard, RolesGuard)
-  @Roles(Role.Admin)
+  @Roles(Role.User)
   updateCar(
     @Args('id', { type: () => Int }) id: number,
     @Args('data') data: UpdateCarDTO,
@@ -50,7 +50,7 @@ export class CarResolver {
 
   @Mutation(() => CarModel)
   @UseGuards(IsAuthGuard, RolesGuard)
-  @Roles(Role.Admin)
+  @Roles(Role.User)
   createCar(
     @Args('createCarInput') createCarInput: CreateCarDTO,
   ): Promise<ICar> {
@@ -59,14 +59,14 @@ export class CarResolver {
 
   @Mutation(() => CarModel)
   @UseGuards(IsAuthGuard, RolesGuard)
-  @Roles(Role.Admin)
+  @Roles(Role.User)
   deleteCar(@Args('id', { type: () => Int }) id: number): Promise<ICar> {
     return this.carsService.deleteCar(id);
   }
 
   @ResolveField(() => [DriverModel])
   @UseGuards(IsAuthGuard, RolesGuard)
-  @Roles(Role.Admin)
+  @Roles(Role.User)
   drivers(@Parent() car: ICar): Promise<IDriver[]> {
     return this.carsService.getDrivers(car);
   }

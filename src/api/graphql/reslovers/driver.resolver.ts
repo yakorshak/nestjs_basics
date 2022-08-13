@@ -15,7 +15,7 @@ export class DriverResolver {
 
   @Mutation(() => DriverModel)
   @UseGuards(IsAuthGuard, RolesGuard)
-  @Roles(Role.Admin)
+  @Roles(Role.User)
   createDriver(
     @Args('createDriverInput') createDriverInput: CreateDriverDTO,
   ): Promise<IDriver> {
@@ -24,7 +24,7 @@ export class DriverResolver {
 
   @Query(() => DriverModel, { name: 'findDriver' })
   @UseGuards(IsAuthGuard, RolesGuard)
-  @Roles(Role.Admin)
+  @Roles(Role.User)
   findDriver(@Args('id', { type: () => Int }) id: number) {
     return this.driverService.findOne(id);
   }
