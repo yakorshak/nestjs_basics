@@ -1,5 +1,6 @@
 import { Int, ObjectType, Field } from '@nestjs/graphql';
-import { Role } from 'src/domain/auth/enums/role.enum';
+import { IRole } from 'src/domain/user/interfaces/role.interface';
+import { RolesModel } from './roles.model';
 
 @ObjectType()
 export class UserModel {
@@ -12,6 +13,6 @@ export class UserModel {
   @Field()
   password: string;
 
-  @Field()
-  roles: Role;
+  @Field(() => [RolesModel], { nullable: true })
+  roles: IRole[];
 }

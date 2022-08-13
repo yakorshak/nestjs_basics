@@ -19,5 +19,3 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     return user;
   }
 }
-
-// Лучше разобраться как работает Guard with Local Strategy

@@ -1,4 +1,4 @@
-import { Role } from 'src/domain/auth/enums/role.enum';
+import { IRole } from './role.interface';
 
 export interface IUserBody {
   username: string;
@@ -7,7 +7,7 @@ export interface IUserBody {
 
 export interface IUser extends IUserBody {
   id: number;
-  roles: Role;
+  roles: IRole[];
 }
 
 export interface IUserLogged {

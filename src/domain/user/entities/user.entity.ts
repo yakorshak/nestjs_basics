@@ -1,6 +1,13 @@
-import { Role } from 'src/domain/auth/enums/role.enum';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { IRole } from '../interfaces/role.interface';
 import { IUser } from '../interfaces/user.interfaces';
+import { RolesEntity } from './roles.entity';
 
 @Entity()
 export class UserEntity implements IUser {
@@ -13,10 +20,9 @@ export class UserEntity implements IUser {
   @Column()
   password: string;
 
-  @Column({
-    type: 'enum',
-    enum: Role,
-    default: Role.Admin,
+  @JoinTable()
+  @ManyToMany(() => RolesEntity, (roles) => roles.user, {
+    cascade: true,
   })
-  roles: Role;
+  roles: IRole[];
 }

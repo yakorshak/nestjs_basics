@@ -28,11 +28,16 @@ type ShopModel {
   color: String!
 }
 
+type RolesModel {
+  id: Int!
+  name: String!
+}
+
 type UserModel {
   id: Int!
   username: String!
   password: String!
-  roles: String!
+  roles: [RolesModel!]
 }
 
 type LogOutUserDTO {
@@ -52,6 +57,7 @@ type Query {
 type Mutation {
   createShop(createShopInput: CreateShopDTO!): ShopModel!
   createUser(createUserInput: CreateUserDTO!): UserModel!
+  grantAdminRoleById(ThereIsShouldBeId: Int!): UserModel!
   updateCar(id: Int!, data: UpdateCarDTO!): CarModel!
   createCar(createCarInput: CreateCarDTO!): CarModel!
   deleteCar(id: Int!): CarModel!
