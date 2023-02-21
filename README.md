@@ -27,7 +27,7 @@ $ docker-compose up
 <li> Find a user by 'id'
 <li> Create a car
 <li> Create a driver 
-<i> (the driver should be assigned to any car) <i>
+<i> (the driver should be assigned to any car) </i>
 <li> Find a driver by 'id'
 <li> Find all cars and related drivers to them
 <li> Find a car using 'id' and related drivers to the car
