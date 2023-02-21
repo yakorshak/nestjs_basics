@@ -1,6 +1,6 @@
 ## Description
 
-This is application called 'Cars register'
+The application is called 'Cars register'. It has very basic Nest.js functionality and helps to understand the fundamentals of the framework. I have implemented authentification using pasport-local strategy from Passport.js, RBAC authorization model. There is basics CRUD model that allows practicing fully-cycle actions with entities. Domain and API are separated so you can easily change transport from GraphQl to any other if you want. The application is built within docker and easily runs.
 
 ## Technologies
 
