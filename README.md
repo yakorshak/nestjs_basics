@@ -183,7 +183,7 @@ query {
     brand: "Mercedes",
     color: "Yellow"
   }) {
-  	id,
+    id,
     brand,
     color
   }
@@ -194,7 +194,7 @@ query {
   
 ```bash
 {
-	deleteCar(id: 9) {
+  deleteCar(id: 9) {
     brand,
   }
 }
